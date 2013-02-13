@@ -2,81 +2,168 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>jquery-addresspicker demo (a jQuery UI widget)</title>
-	<link rel="stylesheet" href="themes/base/jquery.ui.all.css">
-	<link rel="stylesheet" href="demo.css">
-	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-	<script src="../lib/jquery-1.4.4.min.js"></script>
-	<script src="../lib/jquery-ui-1.8.7.min.js"></script>
-	<script src="../src/jquery.ui.addresspicker.js"></script>
-	<script>
-	$(function() {
-		var addresspicker = $( "#addresspicker" ).addresspicker();
-		var addresspickerMap = $( "#addresspicker_map" ).addresspicker({
-			regionBias: "fr",
-		  elements: {
-		    map:      "#map",
-		    lat:      "#lat",
-		    lng:      "#lng",
-			street_number: '#street_number',
-			route: '#route',
-			intersection: '#intersection',
-		    locality: '#locality',
-		    administrative_area_level_2: '#administrative_area_level_2',
-		    administrative_area_level_1: '#administrative_area_level_1',
-		    country:  '#country',
-		    postal_code: '#postal_code',
-        type:    '#type' 
-		  }
-		});
-		var gmarker = addresspickerMap.addresspicker( "marker");
-		gmarker.setVisible(true);
-		addresspickerMap.addresspicker( "updatePosition");
-		
-	});
-	</script>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" media="screen">
+	<link rel="stylesheet" href="css/demo.css" media="screen">
+
+    <!--[if lt IE 9]><script src="../lib/html5shiv.js"></script><![endif]-->
+
 </head>
 <body>
-  <a href="http://github.com/sgruhier/jquery-addresspicker"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub" /></a>
+    <a href="http://github.com/adagyo/jquery-addresspicker"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub" /></a>
 
-<div class="demo">
-  <h1>jquery-addresspicker demo (a jQuery UI widget)</h1>
-  
-  <h2>Default address picker, only autocomplete.</h2>
-  <p>
-    Default address picker. It's just a jQuery autocomplete filled by google map geocoder suggestions.<br/>
-    Try to enter an address like <em>Saint</em> and you'll see suggests
-  </p>
-	<div class='input'>
-	  <label>Address : </label><input id="addresspicker" />
-  </div>
+    <div class="container">
+        <div class="row page-header">
+            <div class="span12"><h1>jquery-addresspicker demo (a jQuery UI widget)</h1></div>
+        </div>
 
-  <h2>Address picker, with instant display selection on map.</h2>
-  <p>
-    Same but the map on the left displays selected address, even while you navigate in autocomplete suggestions.<br/>
-    Lat and Lng fields are just for information, they should be hidden inputs.<br/><br/>
-    You can even adjust marker position on the map.<br/>
-  </p>
-  <div>
-  	<div class='input'>
-	    <label>Address : </label> <input id="addresspicker_map" /><br/>
-		<label>Street nb: </label> <input id="street_number" disabled=disabled> <br/>
-		<label>Route: </label> <input id="route" disabled=disabled> <br/>
-		<label>intersect.: </label> <input id="intersection" disabled=disabled> <br/>
-		<label>Locality: </label> <input id="locality" disabled=disabled> <br/>
-		<label>District: </label> <input id="administrative_area_level_2" disabled=disabled> <br/>
-		<label>State/Province: </label> <input id="administrative_area_level_1" disabled=disabled> <br/>
-		<label>Country:  </label> <input id="country" disabled=disabled> <br/>
-		<label>Postal Code: </label> <input id="postal_code" disabled=disabled> <br/>
-		<label>Lat:      </label> <input id="lat" disabled=disabled> <br/>
-		<label>Lng:      </label> <input id="lng" disabled=disabled> <br/>
-      <label>Type:     </label> <input id="type" disabled=disabled /> <br/>
-    </div>
-    <div id="map"></div>
-    <div id="legend">You can drag and drop the marker to the correct location</div>
-  </div>
-</div><!-- End demo -->
+        <div class="row">
+            <div class="span12">
+                <div class="row">
+                    <div class="span12">
+                        <input type="text" class="form-search span12" id="addresspicker_map" placeholder="Search a place">
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <form class="form-horizontal" action="#">
+                        <div class="span3">
+                            <div class="control-group"><label class="control-label">Lat:</label><div class="controls"><input type="text" id="lat" disabled=disabled></div></div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group"><label class="control-label">Lng:</label><div class="controls"><input type="text" id="lng" disabled=disabled></div></div>
+                        </div>
+                        <div class="span3">
+                            <div class="control-group"><label class="control-label">Type:</label><div class="controls"><input type="text" id="type" disabled=disabled></div></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span4">
+                <h2>Long names</h2>
+                <form class="form-horizontal" action="#">
+                    <div class="control-group"><label class="control-label">Street nb:</label><div class="controls"><input type="text" id="street_number" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Route:</label><div class="controls"><input type="text" id="route" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">intersect.:</label><div class="controls"><input type="text" id="intersection" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Locality:</label><div class="controls"><input type="text" id="locality" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Civil div.:</label><div class="controls"><input type="text" id="administrative_area_level_3" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">District:</label><div class="controls"><input type="text" id="administrative_area_level_2" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">State/Province:</label><div class="controls"><input type="text" id="administrative_area_level_1" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Country:</label><div class="controls"><input type="text" id="country" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Postal Code:</label><div class="controls"><input type="text" id="postal_code" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Political:</label><div class="controls"><input type="text" id="political" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">colloquial_area:</label><div class="controls"><input type="text" id="colloquial_area" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">sublocality:</label><div class="controls"><input type="text" id="sublocality" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">neighborhood:</label><div class="controls"><input type="text" id="neighborhood" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">premise:</label><div class="controls"><input type="text" id="premise" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">subpremise:</label><div class="controls"><input type="text" id="subpremise" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">natural_feature:</label><div class="controls"><input type="text" id="natural_feature" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">airport:</label><div class="controls"><input type="text" id="airport" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">park:</label><div class="controls"><input type="text" id="park" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">point_of_interest:</label><div class="controls"><input type="text" id="point_of_interest" disabled=disabled></div></div>
+                </form>
+            </div>
+            <div class="span4">
+                <h2>Short names</h2>
+                <form class="form-horizontal" action="#">
+                    <div class="control-group"><label class="control-label">Street nb:</label><div class="controls"><input type="text" id="street_number_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Route:</label><div class="controls"><input type="text" id="route_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">intersect.:</label><div class="controls"><input type="text" id="intersection_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Locality:</label><div class="controls"><input type="text" id="locality_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Civil div.:</label><div class="controls"><input type="text" id="administrative_area_level_3_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">District:</label><div class="controls"><input type="text" id="administrative_area_level_2_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">State/Province:</label><div class="controls"><input type="text" id="administrative_area_level_1_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Country:</label><div class="controls"><input type="text" id="country_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Postal Code:</label><div class="controls"><input type="text" id="postal_code_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">Political:</label><div class="controls"><input type="text" id="political_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">colloquial_area:</label><div class="controls"><input type="text" id="colloquial_area_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">sublocality:</label><div class="controls"><input type="text" id="sublocality_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">neighborhood:</label><div class="controls"><input type="text" id="neighborhood_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">premise:</label><div class="controls"><input type="text" id="premise_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">subpremise:</label><div class="controls"><input type="text" id="subpremise_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">natural_feature:</label><div class="controls"><input type="text" id="natural_feature_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">airport:</label><div class="controls"><input type="text" id="airport_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">park:</label><div class="controls"><input type="text" id="park_s" disabled=disabled></div></div>
+                    <div class="control-group"><label class="control-label">point_of_interest:</label><div class="controls"><input type="text" id="point_of_interest_s" disabled=disabled></div></div>
+                </form>
+            </div>
+            <div class="span4">
+                <h2>Map</h2>
+                <div id="map" class="pull-right"></div>
+            </div>
+        </div>
+    </div><!-- End demo -->
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="../lib/jquery-1.9.1.min.js"></script>
+<script src="../lib/jquery-ui-1.10.0.min.js"></script>
+<script src="../src/jquery.ui.addresspicker.js"></script>
+<script>
+  $(function() {
+      var addresspickerMap = $( "#addresspicker_map" ).addresspicker({
+          regionBias: "fr",
+          elements: {
+              map:      "#map",
+              lat:      "#lat",
+              lng:      "#lng",
+              type:    '#type',
+              long_names: {
+                  street_number: '#street_number',
+                  route: '#route',
+                  intersection: '#intersection',
+                  locality: '#locality',
+                  administrative_area_level_3: '#administrative_area_level_3',
+                  administrative_area_level_2: '#administrative_area_level_2',
+                  administrative_area_level_1: '#administrative_area_level_1',
+                  country:  '#country',
+                  postal_code: '#postal_code',
+                  political: '#political',
+                  colloquial_area: '#colloquial_area',
+                  sublocality: '#sublocality',
+                  neighborhood: '#neighborhood',
+                  premise: '#premise',
+                  subpremise: '#subpremise',
+                  natural_feature: '#natural_feature',
+                  airport: '#airport',
+                  park: '#park',
+                  point_of_interest: '#point_of_interest'
+              },
+              short_names: {
+                  street_number: '#street_number_s',
+                  route: '#route_s',
+                  intersection: '#intersection_s',
+                  locality: '#locality_s',
+                  administrative_area_level_3: '#administrative_area_level_3_s',
+                  administrative_area_level_2: '#administrative_area_level_2_s',
+                  administrative_area_level_1: '#administrative_area_level_1_s',
+                  country:  '#country_s',
+                  postal_code: '#postal_code_s',
+                  political: '#political_s',
+                  colloquial_area: '#colloquial_area_s',
+                  sublocality: '#sublocality_s',
+                  neighborhood: '#neighborhood_s',
+                  premise: '#premise_s',
+                  subpremise: '#subpremise_s',
+                  natural_feature: '#natural_feature_s',
+                  airport: '#airport_s',
+                  park: '#park_s',
+                  point_of_interest: '#point_of_interest_s'
+              }
+          }
+      });
+      var gmarker = addresspickerMap.addresspicker( "marker");
+      gmarker.setVisible(true);
+      addresspickerMap.addresspicker( "updatePosition");
+
+  });
+</script>
 
 </body>
 </html>

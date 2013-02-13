@@ -1,0 +1,20 @@
+@import url(http://fonts.googleapis.com/css?family=Kaushan+Script);
+
+h1, h2 {
+  font-family: 'Kaushan Script', cursive;
+  text-align: center;
+  font-weight: normal;
+}
+
+.form-horizontal .control-group {
+    margin-bottom: 2px;
+}
+
+#map {
+  border: 1px solid #DDD; 
+  width: 95%;
+  height: 300px;
+}
+
+/* Bootstrap tweak */
+#map img { max-width: none; }
